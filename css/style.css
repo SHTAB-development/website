@@ -156,32 +156,24 @@ main,header,footer{position:relative;z-index:1}
 .pill.wait{background:rgba(201,162,75,.14);color:var(--brass)}
 .pill.new{background:rgba(143,163,199,.15);color:var(--new)}
 
-/* весточка: 3D-открытка */
-.mock-card{display:flex;justify-content:center;padding:48px 20px;perspective:900px}
-.card3d{position:relative;width:210px;height:280px;transform-style:preserve-3d}
-.card3d-face{
-  position:absolute;inset:0;border-radius:10px;backface-visibility:hidden;
-  border:1px solid var(--line);
+/* авито: диалог с автоответом */
+.mock-chat{display:flex;flex-direction:column;gap:10px}
+.chat-day{text-align:center;font-size:12px;color:var(--dim);margin:2px 0 6px}
+.bubble{
+  max-width:82%;padding:11px 15px;border-radius:14px;
+  font-size:14.5px;line-height:1.45;
 }
-.card3d-face.front{background:linear-gradient(160deg,#1B2430,#232B23 55%,#2E2620);overflow:hidden}
-.paint{position:absolute;border-radius:50%;filter:blur(22px);opacity:.75}
-.paint.p1{width:130px;height:130px;background:#4C6A8F;top:18px;left:-20px}
-.paint.p2{width:110px;height:110px;background:#6E8F5E;bottom:30px;right:-10px}
-.paint.p3{width:80px;height:80px;background:#C9A24B;bottom:-16px;left:50px}
-.card3d-face.back{background:var(--graphite);transform:rotateY(180deg);padding:26px 20px}
-.card3d-face.back i{display:block;height:8px;border-radius:4px;background:#33373E;margin-bottom:14px}
+.bubble.in{
+  align-self:flex-start;background:var(--graphite);color:var(--ivory);
+  border-bottom-left-radius:4px;
+}
+.bubble.out{
+  align-self:flex-end;background:rgba(201,162,75,.14);color:var(--ivory);
+  border:1px solid rgba(201,162,75,.35);border-bottom-right-radius:4px;
+}
+.bubble-meta{align-self:flex-end;font-size:11.5px;color:var(--brass);padding-right:6px}
 
-/* реванш: рейтинг */
-.mock-elo{padding-bottom:8px}
-.elo-line{margin:6px 0 20px}
-.elo-line svg{width:100%;height:90px;display:block}
-.elo-row{display:flex;align-items:center;gap:14px;padding:11px 4px;border-bottom:1px solid var(--line)}
-.elo-row:last-child{border-bottom:none}
-.elo-row em{font-style:normal;color:var(--dim);font-family:var(--font-mono);font-size:13px;width:14px}
-.elo-row b{height:9px;border-radius:5px;background:var(--graphite)}
-.elo-row span{margin-left:auto;color:var(--steel);font-size:14px}
-.elo-row.you span{color:var(--brass)}
-.elo-row.you b{background:#3A3527}
+.case-nda{margin-top:18px;font-size:13.5px;color:var(--dim);font-style:normal}
 
 /* ---------- Услуги: пин-скролл ---------- */
 .services{position:relative}

@@ -92,11 +92,11 @@
     });
   });
 
-  /* Весточка: открытка вращается по мере прокрутки */
-  const card = document.querySelector('.card3d');
-  if (card) gsap.fromTo(card, { rotateY: -24 }, {
-    rotateY: 195, ease: 'none',
-    scrollTrigger: { trigger: '.mock-card', start: 'top 90%', end: 'bottom 15%', scrub: .6 },
+  /* Авито-кейс: реплики диалога появляются по очереди */
+  const chat = document.querySelector('.mock-chat');
+  if (chat) gsap.from(chat.querySelectorAll('.bubble, .bubble-meta, .chat-day'), {
+    y: 16, opacity: 0, duration: .5, ease: easeOut, stagger: .18,
+    scrollTrigger: { trigger: chat, start: 'top 75%' },
   });
 
   /* Услуги: горизонтальный пин-скролл на десктопе */

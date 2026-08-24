@@ -55,10 +55,10 @@
   <!-- ============ ЧИСЛА ============ -->
   <section class="strip" aria-label="Факты о наших проектах">
     <div class="strip-inner">
-      <div class="fact"><span class="fact-num mono"><span data-count="350">350</span></span><span class="fact-label">учеников в системе школы «Знание»</span></div>
-      <div class="fact"><span class="fact-num mono"><span data-count="4">4</span></span><span class="fact-label">филиала школы работают в одной CRM</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="50">50</span></span><span class="fact-label">обращений в день CRM отвечает сама — как живой менеджер</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="350">350</span></span><span class="fact-label">учеников учтено в системе для сети школ</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="4">4</span></span><span class="fact-label">филиала работают в одной CRM</span></div>
       <div class="fact"><span class="fact-num mono"><span data-count="3">3</span><span class="unit">мин</span></span><span class="fact-label">занимает заявка, раньше — бумажная анкета и 10 дней</span></div>
-      <div class="fact"><span class="fact-num mono"><span data-count="2">2</span></span><span class="fact-label">приложения живут в проде: Telegram и iOS</span></div>
     </div>
   </section>
 
@@ -68,18 +68,48 @@
 
     <article class="case">
       <div class="case-text">
-        <p class="case-kicker mono">Знание · Лондон</p>
-        <h3>Цифровая система для школы с 350 учениками</h3>
-        <p>Русская субботняя школа: четыре филиала и экзаменационный центр Pearson Edexcel.
-           Раньше — бумажная анкета на три страницы, фото клеем, перевод по реквизитам
-           и до десяти дней ожидания. Теперь родитель подаёт заявку за три минуты,
-           администрация видит её сразу, преподаватель отмечает посещаемость с телефона.</p>
+        <p class="case-kicker mono">Продажи на Авито</p>
+        <h3>CRM, которая отвечает клиентам как живой менеджер</h3>
+        <p>Продавцу пишут около пятидесяти покупателей в день. Отвечать каждому вручную —
+           это целый рабочий день переписки. Теперь первый ответ уходит за секунды
+           в любое время суток: система ведёт диалог как человек, уточняет детали
+           и доводит до сделки, а владелец подключается только там, где нужен.</p>
         <ul class="case-points">
-          <li>Приём заявок с автоматическими письмами и номером вида ZN-26-0001</li>
-          <li>Журнал посещаемости: крупные кнопки, аллергии и телефоны родителей в строке ребёнка</li>
+          <li>Около 50 диалогов в день без участия владельца</li>
+          <li>Ответ за секунды: ночью, в выходные, в сезонный наплыв</li>
+          <li>Каждое обращение остаётся в CRM: статус, история, напоминания</li>
+        </ul>
+        <p class="case-stack mono">CRM · Автоответы · Авито</p>
+      </div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="mock mock-chat">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="chat-day mono">23:41</div>
+          <div class="bubble in">Здравствуйте, ещё актуально?</div>
+          <div class="bubble out">Да, в наличии. Подскажите, какой размер нужен — отвечу по остаткам сразу.</div>
+          <div class="bubble-meta mono">ответ за 6 секунд</div>
+          <div class="bubble in">А завтра к вечеру привезёте?</div>
+          <div class="bubble out">Да, до 19:00. Оформляю доставку на завтра?</div>
+          <div class="bubble-meta mono">сделка → CRM</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case case-flip">
+      <div class="case-text">
+        <p class="case-kicker mono">Сеть школ · CRM</p>
+        <h3>Одна система для школы с четырьмя филиалами</h3>
+        <p>Субботняя школа: 350 учеников, четыре филиала, экзамены и очереди
+           из бумажных анкет. Раньше заявка шла до десяти дней, теперь родитель
+           подаёт её за три минуты, администрация видит сразу, преподаватель
+           отмечает посещаемость с телефона.</p>
+        <ul class="case-points">
+          <li>Приём заявок с автоматическими письмами и номером для каждой семьи</li>
+          <li>Журнал посещаемости: крупные кнопки, аллергии и телефоны родителей под рукой</li>
           <li>Сводка директора: филиалы, группы, финансы на одном экране</li>
         </ul>
         <p class="case-stack mono">Django · PostgreSQL · CRM</p>
+        <p class="case-nda">Название школы и демо не публикуем по договорённости с клиентом — покажем при разговоре.</p>
       </div>
       <div class="case-visual" aria-hidden="true">
         <div class="mock mock-crm">
@@ -94,56 +124,7 @@
       </div>
     </article>
 
-    <article class="case case-flip">
-      <div class="case-text">
-        <p class="case-kicker mono">Весточка · Telegram</p>
-        <h3>Открытка из фотографии, прямо в мессенджере</h3>
-        <p>Mini App внутри Telegram: загружаете фото, нейросеть превращает его
-           в акварель, открытку можно покрутить в 3D и отправить близким.
-           Оплата в Telegram Stars, без выхода из приложения.
-           Работает в проде: <a href="https://t.me/vestochka_app_bot">@vestochka_app_bot</a>.</p>
-        <ul class="case-points">
-          <li>Фото превращается в акварельную картину за полминуты</li>
-          <li>3D-открытка: картина на лицевой стороне, подпись на обороте</li>
-          <li>Платежи, доставка и хранение — всё внутри Telegram</li>
-        </ul>
-        <p class="case-stack mono">React · Vercel · Supabase · Replicate</p>
-      </div>
-      <div class="case-visual" aria-hidden="true">
-        <div class="mock mock-card">
-          <div class="card3d">
-            <div class="card3d-face front"><span class="paint p1"></span><span class="paint p2"></span><span class="paint p3"></span></div>
-            <div class="card3d-face back"><i></i><i></i><i style="width:60%"></i></div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="case-text">
-        <p class="case-kicker mono">Реванш · iOS</p>
-        <h3>Закрытая лига уличного баскетбола</h3>
-        <p>Invite-only соцсеть: сюда не регистрируются, сюда приглашают.
-           Рейтинги ELO в четырёх форматах, команды с тирами, площадки на карте
-           с королями корта, вызовы и реалтайм-чаты. Запись игры занимает 15 секунд,
-           рейтинг считает только сервер.</p>
-        <ul class="case-points">
-          <li>Отдельный ELO на каждый формат: 1×1, 2×2, 3×3, 5×5</li>
-          <li>Гибридное судейство: игра засчитывается сразу, соперник подтверждает одной кнопкой</li>
-          <li>Офлайн-очередь: игра записывается без сети и синхронизируется сама</li>
-        </ul>
-        <p class="case-stack mono">SwiftUI · Supabase · Realtime</p>
-      </div>
-      <div class="case-visual" aria-hidden="true">
-        <div class="mock mock-elo">
-          <div class="elo-line"><svg viewBox="0 0 300 120" preserveAspectRatio="none"><polyline points="0,95 40,88 80,92 120,70 160,74 200,52 240,58 300,30" fill="none" stroke="#C9A24B" stroke-width="3" stroke-linecap="round"/></svg></div>
-          <div class="elo-row"><em>1</em><b style="width:46%"></b><span class="mono">1874</span></div>
-          <div class="elo-row"><em>2</em><b style="width:38%"></b><span class="mono">1791</span></div>
-          <div class="elo-row you"><em>3</em><b style="width:42%"></b><span class="mono">1766</span></div>
-        </div>
-      </div>
-    </article>
-  </section>
+      </section>
 
   <!-- ============ УСЛУГИ (пин-скролл) ============ -->
   <section class="services" id="services">
