@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHTAB — инженерный штаб цифровизации</title>
+<meta name="description" content="SHTAB строит сайты, CRM и автоматизацию для малого бизнеса: заявки не теряются, финансы считаются, расписание живёт в одном месте.">
+<meta property="og:title" content="SHTAB — инженерный штаб цифровизации">
+<meta property="og:description" content="Сайты, CRM и автоматизация для малого бизнеса.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="grid" aria-hidden="true"></canvas>
+
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top" aria-label="SHTAB — на главную">
+    <svg width="30" height="30" viewBox="96 96 320 320" aria-hidden="true"><rect x="136" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/><rect x="229.6" y="136" width="52.8" height="172.8" rx="9.6" fill="#C9A24B"/><rect x="323.2" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/><rect x="136" y="323.2" width="240" height="52.8" rx="9.6" fill="#F2EFE8"/></svg>
+    <span>SHTAB</span>
+  </a>
+  <nav class="nav-links" aria-label="Основная навигация">
+    <a href="#work">Работы</a>
+    <a href="#services">Услуги</a>
+    <a href="#process">Процесс</a>
+    <a class="nav-cta" href="#contact">Обсудить задачу</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <svg class="hero-mark" viewBox="96 96 320 320" width="120" height="120" aria-hidden="true">
+        <rect class="col c1" x="136" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/>
+        <rect class="col c2" x="229.6" y="136" width="52.8" height="172.8" rx="9.6" fill="#C9A24B"/>
+        <rect class="col c3" x="323.2" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/>
+        <rect class="base" x="136" y="323.2" width="240" height="52.8" rx="9.6" fill="#F2EFE8"/>
+      </svg>
+      <h1 class="hero-title">Порядок&nbsp;— наш продукт</h1>
+      <p class="hero-sub">SHTAB строит сайты, CRM и автоматизацию для малого бизнеса.
+         Заявки не теряются, финансы считаются, расписание живёт в одном месте.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brass" href="#work">Смотреть работы</a>
+        <a class="btn btn-ghost" href="#process">Как мы работаем</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ============ ЧИСЛА ============ -->
+  <section class="strip" aria-label="Факты о наших проектах">
+    <div class="strip-inner">
+      <div class="fact"><span class="fact-num mono"><span data-count="350">350</span></span><span class="fact-label">учеников в системе школы «Знание»</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="4">4</span></span><span class="fact-label">филиала школы работают в одной CRM</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="3">3</span><span class="unit">мин</span></span><span class="fact-label">занимает заявка, раньше — бумажная анкета и 10 дней</span></div>
+      <div class="fact"><span class="fact-num mono"><span data-count="2">2</span></span><span class="fact-label">приложения живут в проде: Telegram и iOS</span></div>
+    </div>
+  </section>
+
+  <!-- ============ РАБОТЫ ============ -->
+  <section class="work" id="work">
+    <h2 class="section-title">Работы</h2>
+
+    <article class="case">
+      <div class="case-text">
+        <p class="case-kicker mono">Знание · Лондон</p>
+        <h3>Цифровая система для школы с 350 учениками</h3>
+        <p>Русская субботняя школа: четыре филиала и экзаменационный центр Pearson Edexcel.
+           Раньше — бумажная анкета на три страницы, фото клеем, перевод по реквизитам
+           и до десяти дней ожидания. Теперь родитель подаёт заявку за три минуты,
+           администрация видит её сразу, преподаватель отмечает посещаемость с телефона.</p>
+        <ul class="case-points">
+          <li>Приём заявок с автоматическими письмами и номером вида ZN-26-0001</li>
+          <li>Журнал посещаемости: крупные кнопки, аллергии и телефоны родителей в строке ребёнка</li>
+          <li>Сводка директора: филиалы, группы, финансы на одном экране</li>
+        </ul>
+        <p class="case-stack mono">Django · PostgreSQL · CRM</p>
+      </div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="mock mock-crm">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-row head"><b style="width:38%"></b><b style="width:14%"></b><b style="width:18%"></b></div>
+          <div class="mock-row"><b style="width:52%"></b><span class="pill ok">зачислен</span></div>
+          <div class="mock-row"><b style="width:44%"></b><span class="pill wait">пробный день</span></div>
+          <div class="mock-row"><b style="width:58%"></b><span class="pill ok">зачислен</span></div>
+          <div class="mock-row"><b style="width:40%"></b><span class="pill new">новая</span></div>
+          <div class="mock-row"><b style="width:47%"></b><span class="pill wait">связались</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case case-flip">
+      <div class="case-text">
+        <p class="case-kicker mono">Весточка · Telegram</p>
+        <h3>Открытка из фотографии, прямо в мессенджере</h3>
+        <p>Mini App внутри Telegram: загружаете фото, нейросеть превращает его
+           в акварель, открытку можно покрутить в 3D и отправить близким.
+           Оплата в Telegram Stars, без выхода из приложения.
+           Работает в проде: <a href="https://t.me/vestochka_app_bot">@vestochka_app_bot</a>.</p>
+        <ul class="case-points">
+          <li>Фото превращается в акварельную картину за полминуты</li>
+          <li>3D-открытка: картина на лицевой стороне, подпись на обороте</li>
+          <li>Платежи, доставка и хранение — всё внутри Telegram</li>
+        </ul>
+        <p class="case-stack mono">React · Vercel · Supabase · Replicate</p>
+      </div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="mock mock-card">
+          <div class="card3d">
+            <div class="card3d-face front"><span class="paint p1"></span><span class="paint p2"></span><span class="paint p3"></span></div>
+            <div class="card3d-face back"><i></i><i></i><i style="width:60%"></i></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-text">
+        <p class="case-kicker mono">Реванш · iOS</p>
+        <h3>Закрытая лига уличного баскетбола</h3>
+        <p>Invite-only соцсеть: сюда не регистрируются, сюда приглашают.
+           Рейтинги ELO в четырёх форматах, команды с тирами, площадки на карте
+           с королями корта, вызовы и реалтайм-чаты. Запись игры занимает 15 секунд,
+           рейтинг считает только сервер.</p>
+        <ul class="case-points">
+          <li>Отдельный ELO на каждый формат: 1×1, 2×2, 3×3, 5×5</li>
+          <li>Гибридное судейство: игра засчитывается сразу, соперник подтверждает одной кнопкой</li>
+          <li>Офлайн-очередь: игра записывается без сети и синхронизируется сама</li>
+        </ul>
+        <p class="case-stack mono">SwiftUI · Supabase · Realtime</p>
+      </div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="mock mock-elo">
+          <div class="elo-line"><svg viewBox="0 0 300 120" preserveAspectRatio="none"><polyline points="0,95 40,88 80,92 120,70 160,74 200,52 240,58 300,30" fill="none" stroke="#C9A24B" stroke-width="3" stroke-linecap="round"/></svg></div>
+          <div class="elo-row"><em>1</em><b style="width:46%"></b><span class="mono">1874</span></div>
+          <div class="elo-row"><em>2</em><b style="width:38%"></b><span class="mono">1791</span></div>
+          <div class="elo-row you"><em>3</em><b style="width:42%"></b><span class="mono">1766</span></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ УСЛУГИ (пин-скролл) ============ -->
+  <section class="services" id="services">
+    <div class="services-pin">
+      <h2 class="section-title services-title">Что мы строим</h2>
+      <div class="services-track">
+        <article class="service">
+          <span class="service-num mono">01</span>
+          <h3>Сайты</h3>
+          <p>От исследования и текстов до запуска. Быстрые, аккуратные,
+             с понятной аналитикой: видно, откуда приходят клиенты и что они делают.</p>
+        </article>
+        <article class="service">
+          <span class="service-num mono">02</span>
+          <h3>CRM и учёт</h3>
+          <p>Заявки, клиенты, финансы и расписание в одной системе.
+             Вместо тетрадей, табличек и переписок, в которых всё теряется.</p>
+        </article>
+        <article class="service">
+          <span class="service-num mono">03</span>
+          <h3>Автоматизация и боты</h3>
+          <p>Рутина работает сама: уведомления, документы, отчёты.
+             Telegram-боты и mini apps там, где уже сидят ваши клиенты.</p>
+        </article>
+        <article class="service">
+          <span class="service-num mono">04</span>
+          <h3>Мобильные приложения</h3>
+          <p>Нативные iOS-приложения на SwiftUI: от прототипа до App Store.
+             Когда бизнесу нужен собственный экран в кармане клиента.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРОЦЕСС ============ -->
+  <section class="process" id="process">
+    <h2 class="section-title">Как идёт работа</h2>
+    <ol class="steps">
+      <li class="step">
+        <span class="step-num mono">1</span>
+        <h3>Разговор</h3>
+        <p>Смотрим, как устроен ваш процесс сейчас, и честно говорим,
+           что стоит автоматизировать, а что нет. Бесплатно.</p>
+      </li>
+      <li class="step">
+        <span class="step-num mono">2</span>
+        <h3>Работающий кусок</h3>
+        <p>Вместо презентаций показываем работающую часть системы
+           на ваших данных. Дальше решаете по факту, а не по обещаниям.</p>
+      </li>
+      <li class="step">
+        <span class="step-num mono">3</span>
+        <h3>Запуск</h3>
+        <p>Переносим процесс в систему, обучаем команду, доводим до
+           состояния «работает без нас».</p>
+      </li>
+      <li class="step">
+        <span class="step-num mono">4</span>
+        <h3>Сопровождение</h3>
+        <p>Остаёмся на связи: правки, развитие, новые задачи.
+           Система живёт и растёт вместе с бизнесом.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta" id="contact">
+    <h2>Расскажите о своей задаче</h2>
+    <p>Полчаса разговора, и вы узнаете, что в вашем бизнесе можно
+       перестать делать руками.</p>
+    <!-- TODO: заменить на реальный контакт (Telegram / hello@), когда появится -->
+    <a class="btn btn-brass btn-big" href="https://github.com/SHTAB-development">Мы на GitHub</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a class="nav-logo" href="#top" aria-label="SHTAB — наверх">
+      <svg width="26" height="26" viewBox="96 96 320 320" aria-hidden="true"><rect x="136" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/><rect x="229.6" y="136" width="52.8" height="172.8" rx="9.6" fill="#C9A24B"/><rect x="323.2" y="136" width="52.8" height="172.8" rx="9.6" fill="#F2EFE8"/><rect x="136" y="323.2" width="240" height="52.8" rx="9.6" fill="#F2EFE8"/></svg>
+      <span>SHTAB</span>
+    </a>
+    <p>Инженерный штаб цифровизации · Digital systems studio</p>
+    <p class="mono footer-year">© 2026</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
