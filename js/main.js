@@ -8,6 +8,75 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  /* ---------- Форма заявки: отправка на сервис форм, без него — готовое письмо ---------- */
+  const lead = document.getElementById('lead');
+  if (lead) {
+    const status = lead.querySelector('.lead-status');
+    const button = lead.querySelector('button[type="submit"]');
+    const required = [lead.elements.task, lead.elements.contact];
+
+    const check = el => {
+      const ok = el.value.trim().length > 1;
+      el.closest('.field').classList.toggle('invalid', !ok);
+      el.setAttribute('aria-invalid', String(!ok));
+      const error = document.getElementById(el.id + '-error');
+      error.hidden = ok;
+      if (ok) el.removeAttribute('aria-describedby');
+      else el.setAttribute('aria-describedby', error.id);
+      return ok;
+    };
+    required.forEach(el => el.addEventListener('input', () => {
+      if (el.closest('.field').classList.contains('invalid')) check(el);
+    }));
+
+    /* свет лампы: координаты курсора внутри карточки */
+    lead.addEventListener('pointermove', e => {
+      const r = lead.getBoundingClientRect();
+      lead.style.setProperty('--mx', e.clientX - r.left + 'px');
+      lead.style.setProperty('--my', e.clientY - r.top + 'px');
+    }, { passive: true });
+
+    const mailto = data => {
+      const body = `${data.task}\n\nКонтакт: ${data.contact}` + (data.name ? `\nИмя: ${data.name}` : '');
+      return `mailto:${lead.dataset.mail}?subject=${encodeURIComponent('Задача для SHTAB')}&body=${encodeURIComponent(body)}`;
+    };
+
+    lead.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (lead.elements.website.value) return; // honeypot: боты заполняют скрытое поле
+      const invalid = required.filter(el => !check(el));
+      if (invalid.length) { invalid[0].focus(); return; }
+
+      const data = {
+        task: lead.elements.task.value.trim(),
+        contact: lead.elements.contact.value.trim(),
+        name: lead.elements.name.value.trim(),
+      };
+      const { endpoint, key, mail } = lead.dataset;
+
+      if (endpoint) {
+        button.disabled = true;
+        status.textContent = 'Отправляем…';
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ ...(key && { access_key: key }), subject: 'Заявка с сайта SHTAB', ...data }),
+          });
+          if (!res.ok) throw new Error(res.status);
+          lead.classList.add('sent');
+          status.textContent = 'Заявка у нас. Ответим на контакт, который вы оставили.';
+          return;
+        } catch {
+          button.disabled = false;
+        }
+      }
+
+      location.href = mailto(data);
+      status.innerHTML = `Открыли письмо в вашей почтовой программе — осталось нажать «Отправить». Если письмо не открылось, напишите на <a href="mailto:${mail}">${mail}</a>.`;
+    });
+  }
+
   /* ---------- Фон: чертёжная сетка точек с латунным откликом ---------- */
   const canvas = document.getElementById('grid');
   const ctx = canvas.getContext('2d');
@@ -120,7 +189,7 @@
     y: 32, opacity: 0, duration: .7, ease: easeOut, stagger: .1,
     scrollTrigger: { trigger: '.steps', start: 'top 78%' },
   });
-  gsap.from('.cta > *', {
+  gsap.from('.cta-text > *, .lead', {
     y: 28, opacity: 0, duration: .8, ease: easeOut, stagger: .1,
     scrollTrigger: { trigger: '.cta', start: 'top 75%' },
   });

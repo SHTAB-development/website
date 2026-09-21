@@ -192,11 +192,39 @@
 
   <!-- ============ CTA ============ -->
   <section class="cta" id="contact">
-    <h2>Расскажите о своей задаче</h2>
-    <p>Полчаса разговора, и вы узнаете, что в вашем бизнесе можно
-       перестать делать руками.</p>
-    <!-- TODO: заменить на реальный контакт (Telegram / hello@), когда появится -->
-    <a class="btn btn-brass btn-big" href="https://github.com/SHTAB-development">Мы на GitHub</a>
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2>Расскажите о своей задаче</h2>
+        <p>Полчаса разговора, и вы узнаете, что в вашем бизнесе можно
+           перестать делать руками.</p>
+        <p class="cta-mail">Или напишите напрямую: <a class="mono" href="mailto:shtab@shtabdev.com">shtab@shtabdev.com</a></p>
+      </div>
+
+      <!-- data-endpoint / data-key: сервис приёма форм (например, Web3Forms).
+           Пока пусто — форма открывает готовое письмо на shtab@shtabdev.com -->
+      <form class="lead" id="lead" novalidate data-endpoint="" data-key="" data-mail="shtab@shtabdev.com">
+        <div class="field">
+          <label for="lead-task">Что у вас сейчас делается руками?</label>
+          <textarea id="lead-task" name="task" rows="4" required
+            placeholder="Например: заявки с Авито переписываем в таблицу, расписание ведём в тетради"></textarea>
+          <p class="field-error" id="lead-task-error" hidden>Опишите задачу хотя бы в паре слов</p>
+        </div>
+        <div class="field">
+          <label for="lead-contact">Как с вами связаться</label>
+          <input id="lead-contact" name="contact" type="text" required autocomplete="off"
+            placeholder="Telegram, телефон или почта">
+          <p class="field-error" id="lead-contact-error" hidden>Оставьте контакт, чтобы мы могли ответить</p>
+        </div>
+        <div class="field">
+          <label for="lead-name">Как вас зовут <span class="optional">— необязательно</span></label>
+          <input id="lead-name" name="name" type="text" autocomplete="name">
+        </div>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-brass btn-big" type="submit">Получить разбор</button>
+        <p class="lead-note">Разговор бесплатный. Контакт используем только для ответа.</p>
+        <p class="lead-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 
 </main>
@@ -208,6 +236,7 @@
       <span>SHTAB</span>
     </a>
     <p>Инженерный штаб цифровизации · Digital systems studio</p>
+    <p><a class="mono" href="mailto:shtab@shtabdev.com">shtab@shtabdev.com</a></p>
     <p class="mono footer-year">© 2026</p>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 :root{
   --ink:#0E0F12; --ink2:#131519; --graphite:#23262B; --line:#2A2D33;
   --ivory:#F2EFE8; --steel:#A6ACB6; --dim:#7B818B; --brass:#C9A24B;
-  --ok:#8FB07A; --warn:#C9A24B; --new:#8FA3C7;
+  --ok:#8FB07A; --warn:#C9A24B; --new:#8FA3C7; --err:#D98B7A;
   --font-display:"Unbounded","Onest",system-ui,sans-serif;
   --font-body:"Onest",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,monospace;
@@ -214,16 +214,56 @@ main,header,footer{position:relative;z-index:1}
 .step p{color:var(--steel);font-size:15px;text-wrap:pretty}
 
 /* ---------- CTA ---------- */
-.cta{
-  text-align:center;padding:140px 24px;border-top:1px solid var(--line);
-  background:var(--ink2);
+.cta{padding:140px 32px;border-top:1px solid var(--line);background:var(--ink2)}
+.cta-inner{
+  max-width:1160px;margin:0 auto;display:grid;
+  grid-template-columns:1fr minmax(0,480px);gap:clamp(40px,6vw,96px);align-items:start;
 }
 .cta h2{
   font-family:var(--font-display);font-weight:800;
   font-size:clamp(1.9rem,4.5vw,3.2rem);letter-spacing:.005em;
-  text-wrap:balance;max-width:20ch;margin:0 auto;
+  line-height:1.12;text-wrap:balance;max-width:14ch;
 }
-.cta p{color:var(--steel);margin:24px auto 40px;max-width:46ch;font-size:18px;text-wrap:pretty}
+.cta-text p{color:var(--steel);margin-top:24px;max-width:40ch;font-size:18px;text-wrap:pretty}
+.cta-text .cta-mail{font-size:15px;color:var(--dim)}
+
+/* форма заявки: свет лампы идёт за курсором */
+.lead{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;gap:20px;
+  background:var(--ink);border:1px solid var(--line);border-radius:14px;padding:32px;
+}
+.lead::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),rgba(201,162,75,.11),transparent 70%);
+  transition:opacity .4s ease;
+}
+.lead:hover::before{opacity:1}
+.lead > *{position:relative}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-size:14px;font-weight:500;color:var(--steel)}
+.field .optional{color:var(--dim);font-weight:400}
+.field input,.field textarea{
+  width:100%;background:var(--ink2);color:var(--ivory);
+  border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+  font:inherit;font-size:16px;resize:vertical;
+  transition:border-color .2s;
+}
+.field textarea{min-height:112px}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.field input:hover,.field textarea:hover{border-color:#3A3E46}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brass)}
+.field.invalid input,.field.invalid textarea{border-color:var(--err)}
+.field-error{font-size:13.5px;color:var(--err)}
+.lead .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+button.btn{border:0;cursor:pointer;font-family:inherit}
+.lead .btn{align-self:flex-start}
+.lead .btn[disabled]{opacity:.6;cursor:progress;transform:none}
+.lead-note{font-size:13.5px;color:var(--dim)}
+.lead-status{font-size:15px;color:var(--ivory)}
+.lead-status:empty{display:none}
+.lead-status a{font-weight:600}
+.lead.sent .field,.lead.sent .btn,.lead.sent .lead-note{display:none}
+.lead.sent .lead-status{font-size:18px;padding:24px 0}
 
 /* ---------- Футер ---------- */
 .footer{border-top:2px solid var(--brass);background:var(--ink)}
@@ -240,6 +280,10 @@ main,header,footer{position:relative;z-index:1}
   .case-flip .case-text{order:1}
   .case-flip .case-visual{order:2}
   .nav-links a:not(.nav-cta){display:none}
+  .cta{padding:96px 24px}
+  .cta-inner{grid-template-columns:1fr}
+  .lead{padding:24px}
+  .lead .btn{align-self:stretch;text-align:center}
   .steps{gap:32px 0}
   .services-pin{min-height:auto}
   .services-track{flex-direction:column;padding:0 24px}
