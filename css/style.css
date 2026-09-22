@@ -232,18 +232,11 @@ main,header,footer{position:relative;z-index:1}
 .cta-text p{color:var(--steel);margin-top:24px;max-width:40ch;font-size:18px;text-wrap:pretty}
 .cta-text .cta-mail{font-size:15px;color:var(--dim)}
 
-/* форма заявки: свет лампы идёт за курсором */
+/* форма заявки */
 .lead{
-  position:relative;overflow:hidden;display:flex;flex-direction:column;gap:20px;
+  display:flex;flex-direction:column;gap:20px;
   background:var(--ink);border:1px solid var(--line);border-radius:14px;padding:32px;
 }
-.lead::before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),rgba(201,162,75,.11),transparent 70%);
-  transition:opacity .4s ease;
-}
-.lead:hover::before{opacity:1}
-.lead > *{position:relative}
 .field{display:flex;flex-direction:column;gap:8px}
 .field label{font-size:14px;font-weight:500;color:var(--steel)}
 .field .optional{color:var(--dim);font-weight:400}
@@ -279,7 +272,41 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 .footer-inner p{color:var(--dim);font-size:14px}
 .footer-year{margin-left:auto}
 
-/* ---------- Адаптив ---------- */
+/* ---------- Лампа: свет за курсором на карточках ----------
+   ::before — мягкое пятно по заливке, ::after — блик по границе (маска оставляет только рамку) */
+.lamp{position:relative;isolation:isolate}
+.lamp::before,.lamp::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  opacity:0;transition:opacity .45s ease;
+}
+.lamp::before{
+  z-index:-1;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(201,162,75,.10),transparent 70%);
+}
+.lamp::after{
+  inset:-1px;padding:1px;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(201,162,75,.7),transparent 70%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.lamp:hover::before,.lamp:hover::after{opacity:1}
+
+/* hero: подсказка про свет (только для мыши) */
+.hero-hint{
+  position:absolute;left:var(--gutter);bottom:32px;display:none;align-items:center;gap:10px;
+  font-size:12px;color:var(--dim);letter-spacing:.02em;
+}
+.hero-hint i{width:6px;height:6px;border-radius:50%;background:var(--brass);box-shadow:0 0 12px 2px rgba(201,162,75,.45)}
+@media (pointer:fine){.hero-hint{display:flex}}
+
+/* кейсы: до → после над макетом */
+.case-screen{width:min(440px,100%)}
+.case-delta{display:flex;gap:10px;align-items:baseline;font-size:12.5px;margin:0 0 14px 4px;color:var(--dim)}
+.case-delta s{text-decoration-color:rgba(123,129,139,.8)}
+.case-delta span{color:var(--brass)}
+.case-delta b{color:var(--brass);font-weight:400}
+
+/* ---------- Адаптив ---------- 
 @media (max-width:860px){
   :root{--gutter:24px}
   .case{grid-template-columns:1fr;gap:36px;padding:48px 0}
@@ -310,4 +337,5 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   html{scroll-behavior:auto}
   .hero-scroll span{animation:none}
   *{transition-duration:.01ms!important}
+  .lamp::before,.lamp::after{display:none}
 }

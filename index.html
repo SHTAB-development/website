@@ -52,6 +52,7 @@
       </div>
     </div>
     <div class="hero-scroll" aria-hidden="true"><span></span></div>
+    <p class="hero-hint mono" aria-hidden="true"><i></i>поводите курсором — свет наводит порядок</p>
   </section>
 
   <!-- ============ ЧИСЛА ============ -->
@@ -84,7 +85,9 @@
         <p class="case-stack mono">CRM · Автоответы · Авито</p>
       </div>
       <div class="case-visual" aria-hidden="true">
-        <div class="mock mock-chat">
+       <div class="case-screen">
+        <p class="case-delta mono"><s>целый день переписки</s><span>→</span><b>ответ за 6 секунд</b></p>
+        <div class="mock mock-chat lamp">
           <div class="mock-bar"><i></i><i></i><i></i></div>
           <div class="chat-day mono">23:41</div>
           <div class="bubble in">Здравствуйте, ещё актуально?</div>
@@ -94,6 +97,7 @@
           <div class="bubble out">Да, до 19:00. Оформляю доставку на завтра?</div>
           <div class="bubble-meta mono">сделка → CRM</div>
         </div>
+       </div>
       </div>
     </article>
 
@@ -114,7 +118,9 @@
         <p class="case-nda">Название школы и демо не публикуем по договорённости с клиентом — покажем при разговоре.</p>
       </div>
       <div class="case-visual" aria-hidden="true">
-        <div class="mock mock-crm">
+       <div class="case-screen">
+        <p class="case-delta mono"><s>бумажная анкета · 10 дней</s><span>→</span><b>заявка за 3 минуты</b></p>
+        <div class="mock mock-crm lamp">
           <div class="mock-bar"><i></i><i></i><i></i></div>
           <div class="mock-row head"><b style="width:38%"></b><b style="width:14%"></b><b style="width:18%"></b></div>
           <div class="mock-row"><b style="width:52%"></b><span class="pill ok">зачислен</span></div>
@@ -123,6 +129,7 @@
           <div class="mock-row"><b style="width:40%"></b><span class="pill new">новая</span></div>
           <div class="mock-row"><b style="width:47%"></b><span class="pill wait">связались</span></div>
         </div>
+       </div>
       </div>
     </article>
 
@@ -133,25 +140,25 @@
     <div class="services-pin">
       <h2 class="section-title services-title">Что мы строим</h2>
       <div class="services-track">
-        <article class="service">
+        <article class="service lamp">
           <span class="service-num mono">01</span>
           <h3>Сайты</h3>
           <p>От исследования и текстов до запуска. Быстрые, аккуратные,
              с понятной аналитикой: видно, откуда приходят клиенты и что они делают.</p>
         </article>
-        <article class="service">
+        <article class="service lamp">
           <span class="service-num mono">02</span>
           <h3>CRM и учёт</h3>
           <p>Заявки, клиенты, финансы и расписание в одной системе.
              Вместо тетрадей, табличек и переписок, в которых всё теряется.</p>
         </article>
-        <article class="service">
+        <article class="service lamp">
           <span class="service-num mono">03</span>
           <h3>Автоматизация и боты</h3>
           <p>Рутина работает сама: уведомления, документы, отчёты.
              Telegram-боты и mini apps там, где уже сидят ваши клиенты.</p>
         </article>
-        <article class="service">
+        <article class="service lamp">
           <span class="service-num mono">04</span>
           <h3>Мобильные приложения</h3>
           <p>Нативные iOS-приложения на SwiftUI: от прототипа до App Store.
@@ -204,7 +211,7 @@
 
       <!-- data-endpoint / data-key: сервис приёма форм (например, Web3Forms).
            Пока пусто — форма открывает готовое письмо на shtab@shtabdev.com -->
-      <form class="lead" id="lead" novalidate data-endpoint="" data-key="" data-mail="shtab@shtabdev.com">
+      <form class="lead lamp" id="lead" novalidate data-endpoint="" data-key="" data-mail="shtab@shtabdev.com">
         <div class="field">
           <label for="lead-task">Что у вас сейчас делается руками?</label>
           <textarea id="lead-task" name="task" rows="4" required

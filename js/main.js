@@ -29,13 +29,6 @@
       if (el.closest('.field').classList.contains('invalid')) check(el);
     }));
 
-    /* свет лампы: координаты курсора внутри карточки */
-    lead.addEventListener('pointermove', e => {
-      const r = lead.getBoundingClientRect();
-      lead.style.setProperty('--mx', e.clientX - r.left + 'px');
-      lead.style.setProperty('--my', e.clientY - r.top + 'px');
-    }, { passive: true });
-
     const mailto = data => {
       const body = `${data.task}\n\nКонтакт: ${data.contact}` + (data.name ? `\nИмя: ${data.name}` : '');
       return `mailto:${lead.dataset.mail}?subject=${encodeURIComponent('Задача для SHTAB')}&body=${encodeURIComponent(body)}`;
@@ -77,12 +70,27 @@
     });
   }
 
-  /* ---------- Фон: чертёжная сетка точек с латунным откликом ---------- */
+  /* ---------- Лампа: свет за курсором на карточках (.lamp) ---------- */
+  document.addEventListener('pointermove', e => {
+    const el = e.target.closest?.('.lamp');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', e.clientX - r.left + 'px');
+    el.style.setProperty('--my', e.clientY - r.top + 'px');
+  }, { passive: true });
+
+  /* ---------- Фон: свет наводит порядок.
+     Вдали от курсора точки лежат вразнобой и тусклые, в круге света встают
+     в ровную сетку и загораются латунью. ---------- */
   const canvas = document.getElementById('grid');
   const ctx = canvas.getContext('2d');
   let W, H, dots = [];
-  const GAP = 56;
-  const mouse = { x: -1e4, y: -1e4 };
+  const GAP = 56, R = 260, JITTER = 14;
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  const mouse = { x: 0, y: 0 };
+
+  let seed = 7;
+  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 - .5; }; // одинаковый «хаос» при каждом build
 
   function build() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -90,33 +98,45 @@
     canvas.width = W * dpr; canvas.height = H * dpr;
     canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    dots = [];
+    seed = 7; dots = [];
     for (let x = GAP / 2; x < W; x += GAP)
-      for (let y = GAP / 2; y < H; y += GAP) dots.push({ x, y });
+      for (let y = GAP / 2; y < H; y += GAP)
+        dots.push({ x, y, jx: rnd() * 2 * JITTER, jy: rnd() * 2 * JITTER, o: 0 });
+    if (coarse) { mouse.x = W / 2; mouse.y = H * .42; } // без мыши свет стоит в центре экрана
   }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
+    // мягкое пятно света
+    const g = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, R * 1.3);
+    g.addColorStop(0, 'rgba(201,162,75,0.07)'); g.addColorStop(1, 'rgba(201,162,75,0)');
+    ctx.fillStyle = g; ctx.fillRect(mouse.x - R * 1.3, mouse.y - R * 1.3, R * 2.6, R * 2.6);
+    let moving = false;
     for (const d of dots) {
       const dist = Math.hypot(d.x - mouse.x, d.y - mouse.y);
-      const glow = Math.max(0, 1 - dist / 200);
-      if (glow > 0.02) {
-        ctx.fillStyle = `rgba(201,162,75,${0.06 + glow * 0.5})`;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, 1.2 + glow * 1.4, 0, 7);
-        ctx.fill();
+      const target = dist < R ? 1 - (dist / R) ** 2 : 0;
+      const delta = target - d.o;
+      if (Math.abs(delta) > .002) { d.o += delta * .1; moving = true; } else d.o = target;
+      const chaos = 1 - d.o;
+      const x = d.x + d.jx * chaos, y = d.y + d.jy * chaos;
+      if (d.o > .02) {
+        ctx.fillStyle = `rgba(201,162,75,${0.08 + d.o * 0.6})`;
+        ctx.beginPath(); ctx.arc(x, y, 1.3 + d.o * 1.6, 0, 7); ctx.fill();
       } else {
-        ctx.fillStyle = 'rgba(242,239,232,0.055)';
-        ctx.fillRect(d.x - 1, d.y - 1, 2, 2);
+        ctx.fillStyle = 'rgba(242,239,232,0.06)';
+        ctx.fillRect(x - 1, y - 1, 2, 2);
       }
     }
+    return moving;
   }
 
   build();
   addEventListener('resize', build);
   if (reduced) {
-    draw(); // статичная сетка без анимации
+    for (const d of dots) { d.jx = d.jy = 0; } // без движения: ровная тихая сетка
+    mouse.x = -1e4; mouse.y = -1e4; draw();
   } else {
+    mouse.x = W / 2; mouse.y = H * .42; // свет уже горит при загрузке, пока курсор не двинулся
     addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
     (function loop() { draw(); requestAnimationFrame(loop); })();
   }
@@ -134,7 +154,8 @@
     .from('.hero-mark .base', { scaleX: 0, transformOrigin: 'center', duration: .6, ease: easeOut })
     .from('.hero-mark .col', { y: 60, opacity: 0, duration: .7, ease: easeOut, stagger: .09 }, '-=.25')
     .from('.hero-title', { y: 36, opacity: 0, duration: .8, ease: easeOut }, '-=.35')
-    .from('.hero-sub, .hero-actions', { y: 24, opacity: 0, duration: .7, ease: easeOut, stagger: .12 }, '-=.5');
+    .from('.hero-sub, .hero-actions', { y: 24, opacity: 0, duration: .7, ease: easeOut, stagger: .12 }, '-=.5')
+    .from('.hero-hint', { opacity: 0, duration: 1 }, '+=.4');
 
   /* Числа: счётчики при появлении */
   document.querySelectorAll('[data-count]').forEach(el => {
@@ -159,6 +180,15 @@
       x: flip ? -48 : 48, opacity: 0, duration: .9, ease: easeOut,
       scrollTrigger: { trigger: c, start: 'top 72%' },
     });
+  });
+
+  /* Кейсы: «до» гаснет, «после» загорается, когда свет доходит до макета */
+  document.querySelectorAll('.case-delta').forEach(el => {
+    gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 80%' } })
+      .from(el.querySelector('s'), { opacity: 0, duration: .5, ease: easeOut })
+      .from(el.querySelector('span'), { opacity: 0, x: -8, duration: .4, ease: easeOut })
+      .from(el.querySelector('b'), { opacity: 0, textShadow: '0 0 0 rgba(201,162,75,0)', duration: .6, ease: easeOut })
+      .to(el.querySelector('b'), { textShadow: '0 0 14px rgba(201,162,75,.55)', duration: .5, yoyo: true, repeat: 1 });
   });
 
   /* Авито-кейс: реплики диалога появляются по очереди */
