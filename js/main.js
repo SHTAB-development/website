@@ -172,12 +172,13 @@
   ScrollTrigger.matchMedia({
     '(min-width: 861px)': () => {
       const track = document.querySelector('.services-track');
-      const shift = () => -(track.scrollWidth - innerWidth + 64);
+      const vw = () => document.documentElement.clientWidth;
+      const shift = () => -(track.scrollWidth - vw()); // последняя карточка встаёт на правую границу контейнера
       gsap.to(track, {
         x: shift, ease: 'none',
         scrollTrigger: {
           trigger: '.services-pin', start: 'top top',
-          end: () => '+=' + (track.scrollWidth - innerWidth + 400),
+          end: () => '+=' + (track.scrollWidth - vw() + 400),
           pin: true, scrub: .7, invalidateOnRefresh: true,
         },
       });
