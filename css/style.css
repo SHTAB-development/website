@@ -8,6 +8,8 @@
   --font-mono:"JetBrains Mono",ui-monospace,monospace;
   --z-nav:100;
   --gutter:32px; --container:1160px;
+  /* движение: быстрый выход из состояния покоя, мягкая остановка */
+  --ease-out:cubic-bezier(.23,1,.32,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -46,21 +48,27 @@ main,header,footer{position:relative;z-index:1}
 .nav-cta{
   color:var(--ink)!important;background:var(--brass);
   padding:9px 18px;border-radius:999px;font-weight:600;
-  transition:transform .2s cubic-bezier(.22,1,.36,1),background .2s;
+  transition:transform .16s var(--ease-out),background .2s ease;
 }
-.nav-cta:hover{transform:translateY(-1px);background:#D8B25C}
 
 /* ---------- Кнопки ---------- */
 .btn{
   display:inline-block;padding:14px 28px;border-radius:999px;
   font-weight:600;font-size:16px;
-  transition:transform .25s cubic-bezier(.22,1,.36,1),background .2s,border-color .2s;
+  transition:transform .16s var(--ease-out),background .2s ease,border-color .2s ease;
 }
-.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn:hover{text-decoration:none}
 .btn-brass{background:var(--brass);color:var(--ink)}
-.btn-brass:hover{background:#D8B25C}
 .btn-ghost{border:1px solid var(--line);color:var(--ivory)}
-.btn-ghost:hover{border-color:var(--steel)}
+/* нажатие чувствуется всегда, подъём при наведении — только там, где есть мышь */
+.btn:active,.nav-cta:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn-brass:hover,.nav-cta:hover{background:#D8B25C}
+  .btn-ghost:hover{border-color:var(--steel)}
+  .nav-cta:hover{transform:translateY(-1px)}
+}
 .btn-big{padding:18px 40px;font-size:18px}
 
 /* ---------- Hero ---------- */
@@ -73,11 +81,12 @@ main,header,footer{position:relative;z-index:1}
 .hero-title{
   font-family:var(--font-display);font-weight:800;
   font-size:clamp(1.9rem,6.5vw,5.25rem);line-height:1.08;
-  letter-spacing:.005em;text-wrap:balance;max-width:14ch;
+  letter-spacing:.005em;
 }
+.hero-title .hang{position:absolute} /* вне строки: не влияет на центровку */
 .hero-sub{
-  margin-top:28px;max-width:60ch;font-size:clamp(17px,2vw,20px);
-  color:var(--steel);text-wrap:pretty;
+  margin-top:28px;max-width:62ch;font-size:clamp(17px,2vw,20px);
+  color:var(--steel);text-wrap:balance; /* две строки одной длины */
 }
 .hero-actions{margin-top:44px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .hero-scroll{
@@ -244,7 +253,7 @@ main,header,footer{position:relative;z-index:1}
   width:100%;background:var(--ink2);color:var(--ivory);
   border:1px solid var(--line);border-radius:10px;padding:13px 15px;
   font:inherit;font-size:16px;resize:vertical;
-  transition:border-color .2s;
+  transition:border-color .15s ease;
 }
 .field textarea{min-height:112px}
 .field input::placeholder,.field textarea::placeholder{color:var(--dim)}
@@ -277,7 +286,7 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 .lamp{position:relative;isolation:isolate}
 .lamp::before,.lamp::after{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  opacity:0;transition:opacity .45s ease;
+  opacity:0;transition:opacity .5s ease; /* гаснет медленно, как лампа */
 }
 .lamp::before{
   z-index:-1;
@@ -289,11 +298,14 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
 }
-.lamp:hover::before,.lamp:hover::after{opacity:1}
+@media (hover:hover) and (pointer:fine){
+  .lamp:hover::before,.lamp:hover::after{opacity:1;transition-duration:.18s} /* загорается сразу */
+}
 
 /* hero: подсказка про свет (только для мыши) */
 .hero-hint{
-  position:absolute;left:var(--gutter);bottom:32px;display:none;align-items:center;gap:10px;
+  position:absolute;bottom:32px;display:none;align-items:center;gap:10px;
+  left:max(var(--gutter),calc((100% - var(--container))/2 + var(--gutter))); /* на вертикали логотипа */
   font-size:12px;color:var(--dim);letter-spacing:.02em;
 }
 .hero-hint i{width:6px;height:6px;border-radius:50%;background:var(--brass);box-shadow:0 0 12px 2px rgba(201,162,75,.45)}
@@ -306,7 +318,7 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 .case-delta span{color:var(--brass)}
 .case-delta b{color:var(--brass);font-weight:400}
 
-/* ---------- Адаптив ---------- 
+/* ---------- Адаптив ---------- */
 @media (max-width:860px){
   :root{--gutter:24px}
   .case{grid-template-columns:1fr;gap:36px;padding:48px 0}
@@ -333,9 +345,11 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
 .static .services-pin{min-height:auto}
 
 /* ---------- Reduced motion ---------- */
+/* меньше движения, но не ноль: цвет и прозрачность остаются, сдвиги и масштаб уходят */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .hero-scroll span{animation:none}
-  *{transition-duration:.01ms!important}
+  .btn,.nav-cta{transition-property:background,border-color}
+  .btn:hover,.btn:active,.nav-cta:hover,.nav-cta:active{transform:none}
   .lamp::before,.lamp::after{display:none}
 }

@@ -173,11 +173,11 @@
   document.querySelectorAll('.case').forEach(c => {
     const flip = c.classList.contains('case-flip');
     gsap.from(c.querySelector('.case-text'), {
-      x: flip ? 48 : -48, opacity: 0, duration: .9, ease: easeOut,
+      x: flip ? 32 : -32, opacity: 0, duration: .7, ease: easeOut,
       scrollTrigger: { trigger: c, start: 'top 72%' },
     });
     gsap.from(c.querySelector('.case-visual'), {
-      x: flip ? -48 : 48, opacity: 0, duration: .9, ease: easeOut,
+      x: flip ? -32 : 32, opacity: 0, duration: .7, ease: easeOut,
       scrollTrigger: { trigger: c, start: 'top 72%' },
     });
   });
@@ -194,7 +194,7 @@
   /* Авито-кейс: реплики диалога появляются по очереди */
   const chat = document.querySelector('.mock-chat');
   if (chat) gsap.from(chat.querySelectorAll('.bubble, .bubble-meta, .chat-day'), {
-    y: 16, opacity: 0, duration: .5, ease: easeOut, stagger: .18,
+    y: 12, opacity: 0, duration: .45, ease: easeOut, stagger: .14,
     scrollTrigger: { trigger: chat, start: 'top 75%' },
   });
 
@@ -217,11 +217,11 @@
 
   /* Процесс и CTA: мягкое появление */
   gsap.from('.step', {
-    y: 32, opacity: 0, duration: .7, ease: easeOut, stagger: .1,
+    y: 24, opacity: 0, duration: .6, ease: easeOut, stagger: .07,
     scrollTrigger: { trigger: '.steps', start: 'top 78%' },
   });
   gsap.from('.cta-text > *, .lead', {
-    y: 28, opacity: 0, duration: .8, ease: easeOut, stagger: .1,
+    y: 20, opacity: 0, duration: .6, ease: easeOut, stagger: .07,
     scrollTrigger: { trigger: '.cta', start: 'top 75%' },
   });
 })();
