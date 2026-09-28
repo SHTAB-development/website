@@ -7,7 +7,8 @@
   --font-body:"Onest",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,monospace;
   --z-nav:100;
-  --gutter:32px; --container:1160px;
+  --gutter:32px;
+  --container:clamp(1160px,64vw,1360px); /* 1160 на ноутбуке, до 1360 на широких мониторах */
   /* движение: быстрый выход из состояния покоя, мягкая остановка */
   --ease-out:cubic-bezier(.23,1,.32,1);
 }
