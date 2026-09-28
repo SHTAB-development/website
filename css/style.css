@@ -214,15 +214,31 @@ main,header,footer{position:relative;z-index:1}
   will-change:transform;
 }
 .service{
-  flex:0 0 min(420px,82vw);background:var(--ink2);
-  border:1px solid var(--line);border-radius:14px;padding:40px 36px 44px;
+  flex:0 0 clamp(340px,32vw,480px);min-height:320px;background:var(--ink2);
+  border:1px solid var(--line);border-radius:14px;padding:44px 40px 48px;
+  transform-origin:left center;
 }
 .service-num{font-size:13px;color:var(--brass);letter-spacing:.1em}
 .service h3{
-  font-family:var(--font-display);font-weight:700;font-size:1.35rem;
+  font-family:var(--font-display);font-weight:700;font-size:clamp(1.35rem,1.6vw,1.6rem);
   margin:18px 0 14px;letter-spacing:.005em;
 }
 .service p{color:var(--steel);font-size:15.5px;text-wrap:pretty}
+/* карточка в фокусе пин-скролла горит, как под лампой */
+.service.lit{--mx:28%;--my:0%}
+.service.lit::before{opacity:1}
+.service.lit::after{opacity:.55}
+
+/* прогресс пин-скролла */
+.services-progress{
+  max-width:var(--container);width:100%;margin:40px auto 0;padding:0 var(--gutter);
+}
+.services-progress::before,.services-progress span{display:block;height:1px}
+.services-progress::before{content:"";background:var(--line)}
+.services-progress span{
+  margin-top:-1px;background:var(--brass);
+  transform:scaleX(0);transform-origin:left center;
+}
 
 /* ---------- Процесс ---------- */
 .process{max-width:var(--container);margin:0 auto;padding:120px var(--gutter)}
@@ -348,11 +364,13 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   .step:first-child{border-top:0;padding-top:0}
   .services-pin{min-height:auto}
   .services-track{flex-direction:column;padding:0 var(--gutter)}
-  .service{flex-basis:auto}
+  .service{flex-basis:auto;min-height:0}
+  .services-progress{display:none}
 }
 
-/* статик-режим: карточки услуг переносятся, ничего не уезжает за экран */
+/* без пин-скролла (статик, reduced motion) карточки переносятся, ничего не уезжает за экран */
 .static .services-track{flex-wrap:wrap}
+.static .services-progress{display:none}
 
 /* режим ?static: без вьюпорт-высот, для скриншотов и QA */
 .static .hero{min-height:auto;padding:180px var(--gutter) 120px}
@@ -366,4 +384,6 @@ button.btn{border:0;cursor:pointer;font-family:inherit}
   .btn,.nav-cta{transition-property:background,border-color}
   .btn:hover,.btn:active,.nav-cta:hover,.nav-cta:active{transform:none}
   .lamp::before,.lamp::after{display:none}
+  .services-track{flex-wrap:wrap}
+  .services-progress{display:none}
 }

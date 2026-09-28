@@ -198,20 +198,53 @@
     scrollTrigger: { trigger: chat, start: 'top 75%' },
   });
 
-  /* Услуги: горизонтальный пин-скролл на десктопе */
+  /* Услуги: горизонтальный пин-скролл на десктопе.
+     Путь дорожки считается от контейнера, а не от окна: последняя карточка приезжает
+     к правому краю полосы контента на любом мониторе. Фокус едет вместе со скроллом:
+     карточка в фокусе полного размера и горит, соседние меньше и приглушены. */
   ScrollTrigger.matchMedia({
     '(min-width: 861px)': () => {
       const track = document.querySelector('.services-track');
-      const vw = () => document.documentElement.clientWidth;
-      const shift = () => -(track.scrollWidth - vw()); // последняя карточка встаёт на правую границу контейнера
+      const title = document.querySelector('.services-title');
+      const cards = gsap.utils.toArray('.service');
+      const bar = document.querySelector('.services-progress span');
+      const content = () => {
+        const cs = getComputedStyle(title);
+        return title.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      };
+      const travel = () => {
+        const first = cards[0], last = cards[cards.length - 1];
+        return Math.max(0, last.offsetLeft + last.offsetWidth - first.offsetLeft - content());
+      };
+
+      const focus = progress => {
+        const left = title.getBoundingClientRect().left + parseFloat(getComputedStyle(title).paddingLeft);
+        const w = content();
+        for (const c of cards) {
+          const r = c.getBoundingClientRect();
+          const point = left + r.width / 2 + progress * (w - r.width); // точка фокуса идёт слева направо
+          const d = Math.min(1, Math.abs(r.left + r.width / 2 - point) / (w * .8));
+          c.style.opacity = 1 - d * .55;
+          c.style.transform = `scale(${1 - d * .06})`;
+          c.classList.toggle('lit', d < .3);
+        }
+        if (bar) bar.style.transform = `scaleX(${progress})`;
+      };
+
+      // onRefresh срабатывает ещё при создании твина, поэтому берём прогресс из аргументов, а не из переменной
       gsap.to(track, {
-        x: shift, ease: 'none',
+        x: () => -travel(), ease: 'none',
+        onUpdate() { focus(this.progress()); },
         scrollTrigger: {
           trigger: '.services-pin', start: 'top top',
-          end: () => '+=' + (track.scrollWidth - vw() + 400),
+          end: () => '+=' + Math.max(travel() * 1.6, innerHeight * .9),
           pin: true, scrub: .7, invalidateOnRefresh: true,
+          onRefresh: self => focus(self.progress),
         },
       });
+      focus(0);
+
+      return () => cards.forEach(c => { c.style.opacity = ''; c.style.transform = ''; c.classList.remove('lit'); });
     },
   });
 
