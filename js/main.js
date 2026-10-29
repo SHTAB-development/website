@@ -30,8 +30,8 @@
     }));
 
     const mailto = data => {
-      const body = `${data.task}\n\nКонтакт: ${data.contact}` + (data.name ? `\nИмя: ${data.name}` : '');
-      return `mailto:${lead.dataset.mail}?subject=${encodeURIComponent('Задача для SHTAB')}&body=${encodeURIComponent(body)}`;
+      const body = `${data.task}\n\nContact: ${data.contact}` + (data.name ? `\nName: ${data.name}` : '');
+      return `mailto:${lead.dataset.mail}?subject=${encodeURIComponent('A task for SHTAB')}&body=${encodeURIComponent(body)}`;
     };
 
     lead.addEventListener('submit', async e => {
@@ -49,16 +49,16 @@
 
       if (endpoint) {
         button.disabled = true;
-        status.textContent = 'Отправляем…';
+        status.textContent = 'Sending…';
         try {
           const res = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ ...(key && { access_key: key }), subject: 'Заявка с сайта SHTAB', ...data }),
+            body: JSON.stringify({ ...(key && { access_key: key }), subject: 'Inquiry from the SHTAB website', ...data }),
           });
           if (!res.ok) throw new Error(res.status);
           lead.classList.add('sent');
-          status.textContent = 'Заявка у нас. Ответим на контакт, который вы оставили.';
+          status.textContent = 'Got it. We will reply to the contact you left.';
           return;
         } catch {
           button.disabled = false;
@@ -66,7 +66,7 @@
       }
 
       location.href = mailto(data);
-      status.innerHTML = `Открыли письмо в вашей почтовой программе — осталось нажать «Отправить». Если письмо не открылось, напишите на <a href="mailto:${mail}">${mail}</a>.`;
+      status.innerHTML = `We've opened an email in your mail app — just hit Send. If nothing opened, write to <a href="mailto:${mail}">${mail}</a>.`;
     });
   }
 
