@@ -4,7 +4,7 @@ kicker: "Lily · consumer app"
 summary: "Couples save places, films, trips and dates in one quiet app. Share a reel or a screenshot — Lily recognises what it is."
 client: "SHTAB product"
 year: 2026
-order: 2
+order: 4
 accent: "#8FA37A"
 stack: ["SwiftUI", "iOS 18", "Kotlin · Compose", "Bun · Hono", "Postgres", "StoreKit 2", "Railway"]
 role: ["Product", "Design", "iOS", "Android", "Backend"]

@@ -11,7 +11,7 @@ const steps = [
   <ol class="steps">
     {steps.map((s, i) => (
       <li class="step reveal">
-        <span class="step-num">{i + 1}</span>
+        <span class="step-num">{String(i + 1).padStart(2, '0')}</span>
         <h3>{s.title}</h3>
         <p>{s.text}</p>
       </li>
