@@ -152,7 +152,7 @@ function initLead() {
       const out = await res.json().catch(() => ({}));
       if (res.ok && out.ok) {
         lead.classList.add('sent');
-        status.textContent = 'Got it. We'll get back to you, usually within a working day.';
+        status.textContent = "Got it. We'll get back to you, usually within a working day.";
         return;
       }
       if (res.status === 429) { status.textContent = 'Too many requests from your network. Try again in an hour or write to ' + lead.dataset.mail + '.'; button.disabled = false; return; }
