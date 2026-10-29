@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+---
+<Base title="Contact — SHTAB" description="Tell us about your task. The conversation is free: we'll say what's worth automating and what isn't." bodyClass="contact-page">
+  <section class="page-hero container">
+    <span class="kicker">Contact</span>
+    <h1 class="display">Tell us about your task</h1>
+    <p class="lead">Leave a few words and a way to reach you. We reply within a working day, usually faster.</p>
+  </section>
+  <section class="cta">
+    <div class="container cta-inner">
+      <div class="cta-text">
+        <h2>What happens next</h2>
+        <p>We read your note, look at your process and come back with questions or a time for a half-hour call. No sales script.</p>
+        <div class="channels">
+          <a class="mono" href="mailto:shtab@shtabdev.com">shtab@shtabdev.com</a>
+          <a href="https://github.com/SHTAB-development" rel="noopener">github.com/SHTAB-development</a>
+        </div>
+      </div>
+      <LeadForm />
+    </div>
+  </section>
+</Base>

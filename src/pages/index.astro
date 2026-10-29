@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import Facts from '../components/Facts.astro';
+import CaseCard from '../components/CaseCard.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import Cta from '../components/Cta.astro';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const titleWords = ['Order', 'is'];
+const titleWords2 = ['our', 'product'];
+---
+<Base
+  title="SHTAB — digital systems studio"
+  description="SHTAB builds websites, CRMs, automation and native apps for small businesses: leads don't get lost, finances add up, and the schedule lives in one place."
+>
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <Mark size={120} class="hero-mark" />
+      <!-- слова в отдельных span для раздельного появления; между ними nbsp, чтобы сжатие HTML не съело пробел -->
+      <h1 class="display hero-title">
+        {titleWords.map((w, i) => <><span class="w">{w}</span>{i < titleWords.length - 1 && ' '}</>)}<br />
+        {titleWords2.map((w, i) => <><span class="w">{w}</span>{i < titleWords2.length - 1 && ' '}</>)}
+      </h1>
+      <p class="lead hero-sub">SHTAB builds websites, CRMs, automation and native apps for small businesses.
+        Leads don't get lost, finances add up, and the schedule lives in one place.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brass" href="/work/">See our work</a>
+        <a class="btn btn-ghost" href="/services/">What we build</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true"><span></span></div>
+  </section>
+
+  <Facts />
+
+  <section class="work container" id="work">
+    <div class="work-head">
+      <h2 class="section-title">Selected work</h2>
+      <a class="arrow-link" href="/work/">All projects <i></i></a>
+    </div>
+    <div class="work-grid">
+      {work.map((entry, i) => <CaseCard entry={entry} eager={i === 0} />)}
+    </div>
+  </section>
+
+  <Services />
+  <Process />
+  <Cta />
+</Base>

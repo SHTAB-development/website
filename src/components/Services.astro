@@ -1,0 +1,40 @@
+---
+const services = [
+  {
+    n: '01', title: 'Websites',
+    text: 'From research and copy to launch. Fast, clean, with clear analytics: you see where customers come from and what they do.',
+    items: ['Research, structure and copy', 'Design with motion that serves the story', 'Astro or Next.js, deployed and measured'],
+  },
+  {
+    n: '02', title: 'CRM & accounting',
+    text: 'Leads, customers, finances and schedules in one system. Instead of notebooks, spreadsheets and chats where everything gets lost.',
+    items: ['Process mapping before a line of code', 'Django or FastAPI on Postgres', 'Dashboards the owner actually opens'],
+  },
+  {
+    n: '03', title: 'Automation & bots',
+    text: 'Routine runs itself: notifications, documents, reports. Telegram bots and mini apps where your customers already are.',
+    items: ['Telegram bots and mini apps', 'LLM assistants with a tight brief', 'Integrations: Stripe, marketplaces, email'],
+  },
+  {
+    n: '04', title: 'Mobile apps',
+    text: 'Native iOS apps in SwiftUI, Android in Compose: from prototype to the store. For when a business needs its own screen in the customer\'s pocket.',
+    items: ['SwiftUI, widgets, share extensions', 'Own backend and sync', 'App Store and Play releases'],
+  },
+];
+---
+<section class="services" id="services">
+  <div class="services-pin">
+    <h2 class="section-title services-title container">What we build</h2>
+    <div class="services-track">
+      {services.map((s) => (
+        <article class="service lamp">
+          <span class="service-num">{s.n}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+          <ul>{s.items.map((i) => <li>{i}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+    <div class="services-progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>

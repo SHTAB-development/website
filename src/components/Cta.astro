@@ -1,0 +1,18 @@
+---
+import LeadForm from './LeadForm.astro';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Tell us about your task',
+  text = 'Half an hour of conversation, and you\'ll know what your business can stop doing by hand.',
+} = Astro.props;
+---
+<section class="cta" id="contact">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <p class="cta-mail">Or write to us directly: <a class="mono" href="mailto:shtab@shtabdev.com">shtab@shtabdev.com</a></p>
+    </div>
+    <LeadForm />
+  </div>
+</section>

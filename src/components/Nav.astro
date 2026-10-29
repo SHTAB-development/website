@@ -1,0 +1,25 @@
+---
+import Mark from './Mark.astro';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/work/', label: 'Work' },
+  { href: '/services/', label: 'Services' },
+  { href: '/about/', label: 'About' },
+];
+const current = (href: string) => (path === href || (href !== '/' && path.startsWith(href)) ? 'page' : undefined);
+---
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="/" aria-label="SHTAB — home">
+      <Mark size={30} />
+      <span>SHTAB</span>
+    </a>
+    <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+      <i></i><i></i><i></i>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+      {links.map((l) => <a href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
+      <a class="nav-cta" href="/contact/" aria-current={current('/contact/')}>Discuss a project</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const principles = [
+  { title: 'Order is the product', text: 'We don\'t sell features. We sell a state where leads don\'t get lost, money is counted and the schedule lives in one place.' },
+  { title: 'A working piece before a decision', text: 'Slide decks promise. A working part of the system on your data shows. We build the second one first.' },
+  { title: 'Honest about what not to automate', text: 'Half of the processes we see are better left alone. We say so in the first conversation, for free.' },
+  { title: 'Runs without us', text: 'The goal of every project is a system the owner runs alone. Support is a choice, not a dependency.' },
+  { title: 'Craft in the invisible details', text: 'Spacing, motion, the way a button answers a press. People don\'t notice them one by one. They notice the sum.' },
+];
+const stack = ['Astro', 'Next.js', 'React', 'TypeScript', 'Django', 'FastAPI', 'PostgreSQL', 'SwiftUI', 'Kotlin · Compose', 'Bun · Hono', 'Stripe', 'Telegram Bot API', 'Claude API', 'Railway', 'GSAP'];
+---
+<Base title="About — SHTAB" description="SHTAB is a small digital systems studio: websites, CRMs, automation and native apps for small businesses. Founded in 2026, open code on GitHub.">
+  <section class="page-hero container">
+    <span class="kicker">About</span>
+    <h1 class="display">A small studio with an engineering habit</h1>
+    <p class="lead">SHTAB means «headquarters» in Russian: the room where the map is on the table and the lamp is on. We bring that room to small businesses that run on chats and spreadsheets.</p>
+  </section>
+  <section class="container about-grid">
+    <div>
+      <h2 class="section-title" style="margin-bottom:24px">How we think</h2>
+      <p class="lead" style="font-size:17px">We started in 2026 with one question: why does a four-branch school run on paper when a form takes three minutes to build? Since then we've shipped a ticketing platform with Stripe, a CRM that answers marketplace buyers, a school system and a native app on two platforms. All of it runs without us.</p>
+      <p class="lead" style="font-size:17px;margin-top:18px">Our code is public where the client allows it: <a href="https://github.com/SHTAB-development" rel="noopener">github.com/SHTAB-development</a>.</p>
+      <div class="stack-cloud" aria-label="Stack">{stack.map((s) => <span>{s}</span>)}</div>
+    </div>
+    <ul class="principles">
+      {principles.map((p) => (
+        <li class="reveal">
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <Cta title="Want to see the room?" text="Half an hour on a call. We'll look at your process and say what we'd build first." />
+</Base>

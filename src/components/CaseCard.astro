@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { entry: CollectionEntry<'work'>; eager?: boolean }
+const { entry, eager = false } = Astro.props;
+const d = entry.data;
+const phone = d.screens[0]?.phone ?? false;
+---
+<a class="case-card lamp reveal" href={`/work/${entry.id}/`} style={`--accent:${d.accent}`}>
+  <div class:list={['cover', { phone }]} transition:name={`cover-${entry.id}`}>
+    <img src={d.cover} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </div>
+  <div class="body">
+    <span class="kicker">{d.kicker}</span>
+    <h3 transition:name={`title-${entry.id}`}>{d.title}</h3>
+    <p>{d.summary}</p>
+    <p class="delta"><s>{d.before}</s><span>→</span><b>{d.after}</b></p>
+  </div>
+</a>

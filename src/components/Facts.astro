@@ -1,0 +1,18 @@
+---
+const facts = [
+  { value: 50, unit: '', label: 'inquiries a day answered by a CRM on its own — like a live manager' },
+  { value: 350, unit: '', label: 'students tracked in one system for a school network' },
+  { value: 2, unit: 'weeks', label: 'from brief to a live ticketing platform with Stripe' },
+  { value: 4, unit: '', label: 'releases of a native iOS app in seven weeks' },
+];
+---
+<section class="strip" aria-label="Facts about our projects">
+  <div class="container strip-inner">
+    {facts.map((f) => (
+      <div class="fact">
+        <span class="fact-num"><span data-count={f.value}>{f.value}</span>{f.unit && <span class="unit">{f.unit}</span>}</span>
+        <span class="fact-label">{f.label}</span>
+      </div>
+    ))}
+  </div>
+</section>

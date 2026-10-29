@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const phones = d.screens.length > 0 && d.screens.every((s) => s.phone);
+const coverPhone = d.screens[0]?.phone ?? false;
+---
+<Base title={`${d.title} — SHTAB`} description={d.summary}>
+  <article>
+    <header class="case-hero container">
+      <span class="kicker">{d.kicker}</span>
+      <h1 class="display" transition:name={`title-${entry.id}`}>{d.title}</h1>
+      <p class="delta"><s>{d.before}</s><span>→</span><b>{d.after}</b></p>
+      <div class:list={['case-cover', { phone: coverPhone }]} transition:name={`cover-${entry.id}`}>
+        <img src={d.cover} alt="" loading="eager" decoding="async" />
+      </div>
+      <dl class="case-metrics">
+        {d.metrics.map((m) => (
+          <div class="fact">
+            <dt class="fact-label">{m.label}</dt>
+            <dd class="fact-num">{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <div class="case-layout container">
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="case-meta">
+        <div><dt>Client</dt><dd>{d.client}</dd></div>
+        <div><dt>Year</dt><dd>{d.year}</dd></div>
+        <div><dt>What we did</dt><dd class="tags">{d.role.map((r) => <span>{r}</span>)}</dd></div>
+        <div><dt>Stack</dt><dd class="tags">{d.stack.map((s) => <span>{s}</span>)}</dd></div>
+        {d.link && <div><dt>Live</dt><dd><a class="arrow-link" href={d.link} rel="noopener">{d.linkLabel ?? 'Open'} <i></i></a></dd></div>}
+        {d.nda && <p class="nda">{d.nda}</p>}
+      </aside>
+    </div>
+
+    {d.screens.length > 0 && (
+      <section class:list={['screens', 'container', { phones }]} aria-label="Screens">
+        {d.screens.map((s) => (
+          <figure class:list={['reveal', { phone: s.phone }]}>
+            <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+          </figure>
+        ))}
+      </section>
+    )}
+
+    <section class="case-next container">
+      <span class="kicker">Next project</span>
+      <a href={`/work/${next.id}/`}>
+        <h2 class="display">{next.data.title} <i class="arrow-link"><i></i></i></h2>
+      </a>
+    </section>
+  </article>
+  <Cta />
+</Base>
+
+<style>
+  .case-metrics{align-items:start}
+  .case-metrics .fact{display:flex;flex-direction:column;gap:8px}
+  .case-metrics dt{order:2}
+  .case-metrics dd{font-size:clamp(2rem,3.4vw,3rem)}
+</style>

@@ -1,6 +1,16 @@
-FROM caddy:2-alpine
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY index.html /srv/
-COPY css /srv/css
-COPY js /srv/js
-COPY assets /srv/assets
+# Сборка: Astro → статические страницы + Node-сервер для /api/lead
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine
+WORKDIR /app
+ENV NODE_ENV=production HOST=0.0.0.0 PORT=8080
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+COPY --from=build /app/dist ./dist
+EXPOSE 8080
+CMD ["node", "./dist/server/entry.mjs"]
