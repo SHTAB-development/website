@@ -19,7 +19,7 @@ screens:
   - { src: "/img/work/school-crm/crm.webp", alt: "Admissions board: new → contacted → trial day → enrolled" }
   - { src: "/img/work/school-crm/dashboard.webp", alt: "Director's summary: students, attendance, registers, applications by branch" }
   - { src: "/img/work/school-crm/register.webp", alt: "Attendance register on a phone: big buttons for the teacher", phone: true }
-nda: "Screens are from the demo environment with fictional families; real data stays behind the login."
+nda: "Screens are from the demo environment: every family and child shown is fictional."
 ---
 
 ## The task
