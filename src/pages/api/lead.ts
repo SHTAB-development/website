@@ -24,10 +24,11 @@ const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt
 async function sendTelegram(text: string) {
   const token = env('TELEGRAM_BOT_TOKEN'), chat = env('TELEGRAM_CHAT_ID');
   if (!token || !chat) return false;
+  const thread = Number(env('TELEGRAM_THREAD_ID')) || undefined; // топик «Заявки» в группе с форумом
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chat, text, parse_mode: 'HTML', disable_web_page_preview: true }),
+    body: JSON.stringify({ chat_id: chat, message_thread_id: thread, text, parse_mode: 'HTML', disable_web_page_preview: true }),
     signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) throw new Error(`telegram ${res.status}`);
