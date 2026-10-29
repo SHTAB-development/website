@@ -1,5 +1,5 @@
 ---
-title: "A CRM that answers marketplace buyers like a live manager"
+title: "A CRM that answers marketplace buyers like a real person"
 kicker: "Marketplace sales · Avito"
 summary: "A clothing store gets fifty messages a day. The bot answers in seconds, the owner confirms deals in Telegram, and every conversation lands in the CRM."
 client: "Clothing store on Avito"
@@ -32,4 +32,4 @@ A seller on Avito, a classifieds marketplace, gets around fifty messages from bu
 
 ## Result
 
-Around fifty dialogues a day run without the owner. The first reply goes out in seconds at any hour, and seasonal peaks no longer mean lost buyers.
+Around fifty conversations a day run without the owner. The first reply goes out in seconds at any hour, and seasonal peaks no longer mean lost buyers.

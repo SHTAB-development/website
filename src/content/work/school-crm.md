@@ -19,7 +19,7 @@ screens:
   - { src: "/img/work/school-crm/crm.webp", alt: "Admissions board: new → contacted → trial day → enrolled" }
   - { src: "/img/work/school-crm/dashboard.webp", alt: "Director's summary: students, attendance, registers, applications by branch" }
   - { src: "/img/work/school-crm/register.webp", alt: "Attendance register on a phone: big buttons for the teacher", phone: true }
-nda: "Screens show the demo stand with fictional families; real data stays behind the login."
+nda: "Screens are from the demo environment with fictional families; real data stays behind the login."
 ---
 
 ## The task
@@ -32,7 +32,7 @@ Znaniye is a Russian Saturday school in London: four branches, 350 students ever
 
 **A register that works in a corridor.** Teachers mark attendance from the phone: big buttons, allergies and parents' numbers at hand, a note when the lesson is over and the register is read-only.
 
-**One screen for the director.** Students, attendance, filled registers and applications in work — for the whole school or per branch, with CSV exports for the accountant. Safeguarding data, exam cohorts and notifications are in the same system.
+**One screen for the director.** Students, attendance, filled registers and applications in progress — for the whole school or per branch, with CSV exports for the accountant. Safeguarding data, exam cohorts and notifications are in the same system.
 
 ## Result
 

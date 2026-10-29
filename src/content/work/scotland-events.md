@@ -12,7 +12,7 @@ metrics:
   - { value: "2", label: "weeks from brief to production" }
   - { value: "35", label: "minutes a chosen table is held during checkout" }
   - { value: "2", label: "languages, English and Russian" }
-before: "tickets by messenger and bank transfer"
+before: "tickets sold in chats and by bank transfer"
 after: "pick a table, pay, get a QR"
 cover: "/img/work/scotland/cover.webp"
 screens:
@@ -25,7 +25,7 @@ nda: "The site is live, but we don't publish the link at the client's request."
 
 ## The task
 
-One organiser in Kirkcaldy runs balls, family fairs and evenings for the Russian-speaking and international community of Scotland. Every event has three parts in one: a programme for children, time to meet people, and an evening part. Tickets were sold through messengers, tables were assigned by hand, and the night before each event was spent reconciling lists.
+One organiser in Kirkcaldy runs balls, family fairs and evenings for the Russian-speaking and international community of Scotland. Every event has three parts in one: a programme for children, time to meet people, and an evening programme. Tickets were sold through messengers, tables were assigned by hand, and the night before each event was spent reconciling lists.
 
 She needed a site where guests choose a table and pay on their own, and where she runs everything without a developer.
 
@@ -35,7 +35,7 @@ She needed a site where guests choose a table and pay on their own, and where sh
 
 **Tickets that work at the door.** Every order gets a QR ticket by email. At the entrance, the organiser scans it with her phone's camera, right in the browser.
 
-**A dashboard for one person.** Events, zones, prices, photos and the poster are edited in her own cabinet. Guest lists export to CSV. Applications from partners, artists, volunteers and vendors arrive through a four-step form and land in the same place.
+**A dashboard for one person.** Events, zones, prices, photos and the poster are edited in her own admin panel. Guest lists export to CSV. Applications from partners, artists, volunteers and vendors arrive through a four-step form and land in the same place.
 
 **Gallery and two languages.** Albums with a masonry layout and a lightbox; photos are processed on upload. The whole site switches between English and Russian.
 

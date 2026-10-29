@@ -16,10 +16,10 @@ before: "screenshots and links lost in chats"
 after: "one shared notebook that remembers"
 cover: "/img/work/lily/01-home.webp"
 screens:
-  - { src: "/img/work/lily/01-home.webp", alt: "Lily home screen with the planner and the «soon» timeline", phone: true }
+  - { src: "/img/work/lily/01-home.webp", alt: "Lily home screen with the planner and the “soon” timeline", phone: true }
   - { src: "/img/work/lily/04-places.webp", alt: "Places saved by the couple, with nearby suggestions", phone: true }
   - { src: "/img/work/lily/06-trip.webp", alt: "A trip planned day by day", phone: true }
-  - { src: "/img/work/lily/09-our-story.webp", alt: "«Our story» — the couple's timeline", phone: true }
+  - { src: "/img/work/lily/09-our-story.webp", alt: "“Our story” — the couple's timeline", phone: true }
   - { src: "/img/work/lily/10-passport.webp", alt: "Travel passport with visited places", phone: true }
   - { src: "/img/work/lily/03-planner.webp", alt: "Evening planner suggesting what to do", phone: true }
 link: "https://apps.apple.com/us/app/lily-notebook-for-two/id6806802609"
@@ -28,7 +28,7 @@ linkLabel: "On the App Store"
 
 ## The idea
 
-Couples collect ideas everywhere: a reel with a restaurant, a screenshot of a film, a link to a cabin for the weekend. Then it all drowns in chats. Lily is a shared notebook that remembers what two people want to live through together, helps them do it, and keeps the story.
+Couples collect ideas everywhere: a reel with a restaurant, a screenshot of a film, a link to a cabin for the weekend. Then it all drowns in chats. Lily is a shared notebook that remembers what two people want to do together, helps them do it, and keeps the story.
 
 The loop is simple: **saw → saved → chose → did → remembered.**
 
@@ -36,11 +36,11 @@ The loop is simple: **saw → saved → chose → did → remembered.**
 
 **Smart Send.** Share a reel, a screenshot or a link into Lily, and it recognises a place, a film or a book on its own: on-device OCR, then a language model to make sense of it. No typing.
 
-**One home for everything.** Places with a «nearby» view, a shelf of films and books, trips planned day by day, important dates, moments, a wishlist and agreements. Widgets on the home screen, including the tinted ones.
+**One home for everything.** Places with a “nearby” view, a shelf of films and books, trips planned day by day, important dates, moments, a wishlist and agreements. Widgets on the home screen, including the tinted ones.
 
-**Rituals, not features.** Postcards in three styles with a flip gesture. «Our story» as a timeline. A travel passport with visited places. The app's design system follows a Japanese house: emptiness, pause, quiet materials.
+**Rituals, not features.** Postcards in three styles with a flip gesture. “Our story” as a timeline. A travel passport with visited places. The app's design system is inspired by a Japanese house: emptiness, pause, quiet materials.
 
-**Private by design.** Personal notes are encrypted with CryptoKit; the key lives in the user's iCloud Keychain. The pair is created by a code, with Sign in with Apple.
+**Private by design.** Personal notes are encrypted with CryptoKit; the key lives in the user's iCloud Keychain. A couple pairs up with a code and signs in with Apple.
 
 ## Under the hood
 
